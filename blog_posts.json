@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "author": "John Doe",
+    "title": "First Post",
+    "content": "This is my first post.",
+    "likes": 8
+  },
+  {
+    "id": 2,
+    "author": "Jane Doe",
+    "title": "Second Post",
+    "content": "This is another post. Poop",
+    "likes": 2
+  },
+  {
+    "id": 3,
+    "author": "Jonas",
+    "title": "Hallo Welt",
+    "content": "Hallo da darau\u00dfen!",
+    "likes": 2
+  },
+  {
+    "id": 4,
+    "author": "1",
+    "title": "2",
+    "content": "3",
+    "likes": 1
+  },
+  {
+    "id": 5,
+    "author": "4",
+    "title": "5",
+    "content": "6",
+    "likes": 3
+  }
+]
+
+
+
+
