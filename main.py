@@ -4,6 +4,7 @@ import json
 
 app = Flask(__name__)
 
+
 def get_blog_posts():
     with open("blog_posts.json", "r") as f:
         return json.load(f)
@@ -25,12 +26,12 @@ def add_blog_post(title, content, author):
         "author": author,
         "title": title,
         "content": content,
-        "likes": 0
+        "likes": 0,
     }
     posts.append(new_post)
     save_blog_posts(posts)
 
- 
+
 def update_post(post_id, title, content, author):
     posts = get_blog_posts()
     for post in posts:
@@ -61,13 +62,13 @@ def add():
         title = request.form.get("title")
         content = request.form.get("content")
         author = request.form.get("author")
-        
+
         add_blog_post(title, content, author)
         return redirect("/")
     return render_template("add.html")
 
 
-@app.route('/delete/<int:post_id>')
+@app.route("/delete/<int:post_id>")
 def delete(post_id):
     blog_posts = get_blog_posts()
     for post in blog_posts:
@@ -78,21 +79,32 @@ def delete(post_id):
     return redirect("/")
 
 
-@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+@app.route("/update/<int:post_id>", methods=["GET", "POST"])
 def update(post_id):
     post = fetch_post_by_id(post_id)
     if post is None:
         return "Post not found", 404
-    
-    if request.method == 'POST':
+
+    if request.method == "POST":
         title = request.form.get("title")
         content = request.form.get("content")
         author = request.form.get("author")
-        
+
         update_post(post_id, title, content, author)
         return redirect("/")
 
-    return render_template('update.html', post=post)
+    return render_template("update.html", post=post)
+
+
+@app.route("/like/<int:post_id>")
+def like_post(post_id):
+    posts = get_blog_posts()
+    for post in posts:
+        if post["id"] == post_id:
+            post["likes"] += 1
+            break
+    save_blog_posts(posts)
+    return redirect("/")
 
 
 if __name__ == "__main__":

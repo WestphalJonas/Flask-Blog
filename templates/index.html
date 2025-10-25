@@ -11,6 +11,12 @@
         <p><em>Written by {{ post.author }}</em></p>
         <p>{{ post.content }}</p>
     </a>
+    <div class="like-section">
+        <a href="/like/{{ post.id }}" class="like-button">
+            <span class="heart-icon">♥</span>
+        </a>
+        <span class="like-count">{{ post.likes }}</span>
+    </div>
 </div>
 {% endfor %}
 {% endblock %}
