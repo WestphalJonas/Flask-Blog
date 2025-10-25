@@ -107,6 +107,17 @@ h1 {
     font-weight: 500;
 }
 
+.post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.post-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Form Styles */
 .form-group {
     margin-bottom: 1.5rem;

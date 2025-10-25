@@ -30,6 +30,24 @@ def add_blog_post(title, content, author):
     posts.append(new_post)
     save_blog_posts(posts)
 
+ 
+def update_post(post_id, title, content, author):
+    posts = get_blog_posts()
+    for post in posts:
+        if post["id"] == post_id:
+            post["title"] = title
+            post["content"] = content
+            post["author"] = author
+            break
+    save_blog_posts(posts)
+
+
+def fetch_post_by_id(post_id):
+    posts = get_blog_posts()
+    for post in posts:
+        if post["id"] == post_id:
+            return post
+
 
 @app.route("/")
 def index():
@@ -58,6 +76,23 @@ def delete(post_id):
             break
     save_blog_posts(blog_posts)
     return redirect("/")
+
+
+@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+def update(post_id):
+    post = fetch_post_by_id(post_id)
+    if post is None:
+        return "Post not found", 404
+    
+    if request.method == 'POST':
+        title = request.form.get("title")
+        content = request.form.get("content")
+        author = request.form.get("author")
+        
+        update_post(post_id, title, content, author)
+        return redirect("/")
+
+    return render_template('update.html', post=post)
 
 
 if __name__ == "__main__":
